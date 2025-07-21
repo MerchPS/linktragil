@@ -118,13 +118,15 @@ body {
 /* Links Container */
 .links-container {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .link-card {
     display: flex;
     align-items: center;
     padding: 18px 20px;
-    margin-bottom: 15px;
     border-radius: 15px;
     text-decoration: none;
     color: white;
@@ -236,6 +238,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.floating-icons a {
+    text-decoration: none;
+    color: white;
 }
 
 .floating-icons i {
