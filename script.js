@@ -1,127 +1,367 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Particle Canvas
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    // Particle System
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 3 + 1;
-            this.speedX = Math.random() * 1 - 0.5;
-            this.speedY = Math.random() * 1 - 0.5;
-            this.color = `rgba(${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`;
-        }
-        
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            
-            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        
-        draw() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
+/* Base Styles */
+:root {
+    --primary: #6c5ce7;
+    --primary-light: #a29bfe;
+    --discord: #5865F2;
+    --instagram: #f09433;
+    --instagram-mid: #e6683c;
+    --instagram-end: #dc2743;
+    --whatsapp: #25D366;
+    --saweria: #FF7675;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --bg: #f9f9f9;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Particle Canvas */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Container Styles */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Profile Header */
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.profile-text {
+    position: relative;
+    display: inline-block;
+    padding: 0 30px;
+}
+
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(108, 92, 231, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.tagline {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+.pulse-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(162, 155, 254, 0.1));
+    z-index: 1;
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.4;
+    }
+}
+
+/* Links Container */
+.links-container {
+    margin-top: 20px;
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(0);
+}
+
+.link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.link-hover-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.link-card:hover .link-hover-effect {
+    opacity: 1;
+}
+
+.link-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 20px;
+    transition: var(--transition);
+}
+
+.link-card:hover .link-icon {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.link-content {
+    flex: 1;
+    text-align: left;
+}
+
+.link-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.link-content p {
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: 300;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.link-arrow {
+    width: 25px;
+    opacity: 0.8;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+}
+
+.link-card:hover .link-arrow {
+    transform: translateX(5px);
+    opacity: 1;
+}
+
+/* Specific Link Colors */
+.discord {
+    background: linear-gradient(135deg, var(--discord), #7289da);
+}
+
+.instagram {
+    background: linear-gradient(135deg, var(--instagram), var(--instagram-mid), var(--instagram-end));
+}
+
+.whatsapp {
+    background: linear-gradient(135deg, var(--whatsapp), #128C7E);
+}
+
+.saweria {
+    background: linear-gradient(135deg, var(--saweria), #e84393);
+}
+
+/* Floating Social Icons */
+.social-floater {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.floating-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.floating-icons i {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    animation: float 6s infinite ease-in-out;
+}
+
+.floating-icons i:nth-child(1) {
+    background: var(--discord);
+    animation-delay: 0s;
+}
+
+.floating-icons i:nth-child(2) {
+    background: linear-gradient(45deg, var(--instagram), var(--instagram-end));
+    animation-delay: 1s;
+}
+
+.floating-icons i:nth-child(3) {
+    background: var(--whatsapp);
+    animation-delay: 2s;
+}
+
+.floating-icons i:nth-child(4) {
+    background: var(--saweria);
+    animation-delay: 3s;
+}
+
+.floating-icons i:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Footer Wave */
+.footer-wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: -1;
+}
+
+.footer-wave svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(108, 92, 231, 0.1);
+}
+
+/* Animations */
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+    animation-delay: 0.4s;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
     }
     
-    const particles = [];
-    for (let i = 0; i < 100; i++) {
-        particles.push(new Particle());
+    .logo-text {
+        font-size: 2rem;
     }
     
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-        }
-        
-        requestAnimationFrame(animateParticles);
+    .link-card {
+        padding: 15px;
     }
     
-    animateParticles();
+    .social-floater {
+        bottom: 15px;
+        right: 15px;
+    }
     
-    // GSAP Animations
-    gsap.from(".profile-text", {
-        duration: 1.5,
-        y: -50,
-        opacity: 0,
-        ease: "back.out(1.7)"
-    });
+    .floating-icons i {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo-text {
+        font-size: 1.8rem;
+    }
     
-    const linkCards = document.querySelectorAll('.link-card');
-    linkCards.forEach((card, index) => {
-        gsap.from(card, {
-            duration: 0.8,
-            x: -50,
-            opacity: 0,
-            delay: index * 0.1 + 0.5,
-            ease: "power3.out"
-        });
-        
-        // Hover effect
-        card.addEventListener('mouseenter', () => {
-            gsap.to(card, {
-                duration: 0.3,
-                scale: 1.02,
-                ease: "power1.out"
-            });
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                duration: 0.3,
-                scale: 1,
-                ease: "power1.out"
-            });
-        });
-    });
+    .tagline {
+        font-size: 0.9rem;
+    }
     
-    // Floating icons animation
-    const floatingIcons = document.querySelectorAll('.floating-icons i');
-    floatingIcons.forEach((icon, index) => {
-        gsap.from(icon, {
-            duration: 1,
-            y: 50,
-            opacity: 0,
-            delay: index * 0.2 + 1,
-            ease: "elastic.out(1, 0.5)"
-        });
-    });
-    
-    // Ripple effect for links
-    linkCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 1000);
-        });
-    });
-    
-    // Resize handler
-    window.addEventListener('resize', function() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-});
+    .link-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        margin-right: 12px;
+    }
+}
