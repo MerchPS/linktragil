@@ -3,27 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Community | ALL In One Link</title>
+    <title>Leon Community | Ultimate Link Hub</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Loading Leon Community...</div>
+        </div>
+    </div>
+    
     <canvas id="particle-canvas"></canvas>
     
-    <div class="container animate__animated animate__fadeIn">
+    <div class="container">
         <div class="profile-header">
-            <div class="profile-text animate__animated animate__fadeInDown">
+            <div class="profile-text">
                 <h1 class="logo-text">Leon Community</h1>
-                <p class="tagline">ALL In One Link</p>
+                <p class="tagline">Ultimate Link Hub</p>
                 <div class="pulse-circle"></div>
             </div>
         </div>
         
         <div class="links-container">
+            <!-- WhatsApp Group Link -->
+            <a href="https://chat.whatsapp.com/GMepqMOSEqKA6EDRdVSrNt" class="link-card whatsapp-group animate__animated" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="link-content">
+                    <h3>WhatsApp Group</h3>
+                    <p>Join our public community chat</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="link-hover-effect"></div>
+            </a>
+            
             <!-- Discord Link -->
-            <a href="https://discord.gg/sv5nCUXcDy" class="link-card discord animate__animated animate__fadeInLeft" target="_blank">
+            <a href="https://discord.gg/sv5nCUXcDy" class="link-card discord animate__animated" target="_blank">
                 <div class="link-icon">
                     <i class="fab fa-discord"></i>
                 </div>
@@ -37,8 +60,23 @@
                 <div class="link-hover-effect"></div>
             </a>
             
+            <!-- YouTube Link -->
+            <a href="https://youtube.com/@leon3one?si=Mz556iLFel2BcIVe" class="link-card youtube animate__animated" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="link-content">
+                    <h3>YouTube Channel</h3>
+                    <p>@leon3one</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="link-hover-effect"></div>
+            </a>
+            
             <!-- Instagram Link -->
-            <a href="https://www.instagram.com/gsx_leon33?igsh=MXFtbHhyNzJwMml2Zw==" class="link-card instagram animate__animated animate__fadeInLeft animate__delay-1s" target="_blank">
+            <a href="https://www.instagram.com/gsx_leon33?igsh=MXFtbHhyNzJwMml2Zw==" class="link-card instagram animate__animated" target="_blank">
                 <div class="link-icon">
                     <i class="fab fa-instagram"></i>
                 </div>
@@ -52,8 +90,8 @@
                 <div class="link-hover-effect"></div>
             </a>
             
-            <!-- WhatsApp Link -->
-            <a href="https://wa.me/6281914609483" class="link-card whatsapp animate__animated animate__fadeInLeft animate__delay-2s" target="_blank">
+            <!-- WhatsApp Contact Link -->
+            <a href="https://wa.me/6281914609483" class="link-card whatsapp-contact animate__animated" target="_blank">
                 <div class="link-icon">
                     <i class="fab fa-whatsapp"></i>
                 </div>
@@ -68,7 +106,7 @@
             </a>
             
             <!-- Saweria Link -->
-            <a href="http://saweria.co/Agilleon" class="link-card saweria animate__animated animate__fadeInLeft animate__delay-3s" target="_blank">
+            <a href="http://saweria.co/Agilleon" class="link-card saweria animate__animated" target="_blank">
                 <div class="link-icon">
                     <i class="fas fa-hand-holding-heart"></i>
                 </div>
@@ -85,10 +123,10 @@
         
         <div class="social-floater">
             <div class="floating-icons">
+                <a href="https://chat.whatsapp.com/GMepqMOSEqKA6EDRdVSrNt" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 <a href="https://discord.gg/sv5nCUXcDy" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://youtube.com/@leon3one?si=Mz556iLFel2BcIVe" target="_blank"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.instagram.com/gsx_leon33?igsh=MXFtbHhyNzJwMml2Zw==" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/6281914609483" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="http://saweria.co/Agilleon" target="_blank"><i class="fas fa-heart"></i></a>
             </div>
         </div>
     </div>
@@ -100,8 +138,9 @@
             <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor"></path>
         </svg>
     </div>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
 </body>
 </html>
