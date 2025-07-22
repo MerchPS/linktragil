@@ -1,110 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Community | Connect With Us</title>
+    <title>Leon Community | Ultimate Link Hub</title>
+    <meta name="description" content="Connect with Leon Community through all our official channels">
+    <meta property="og:title" content="Leon Community">
+    <meta property="og:description" content="Official links hub for Leon Community">
+    <meta property="og:image" content="https://example.com/images/og-image.jpg">
+    <meta property="og:url" content="https://leon-community.example.com">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Main Content -->
     <div class="container">
-        <div class="profile-header">
-            <div class="profile-text">
-                <h1 class="logo-text">Leon Community</h1>
-                <p class="tagline">CONNECT WITH US</p>
-            </div>
-        </div>
-        
-        <div class="links-container">
-            <!-- WhatsApp Group Link -->
-            <a href="https://chat.whatsapp.com/GMepqMOSEqKA6EDRdVSrNt" class="link-card whatsapp-group" target="_blank">
-                <div class="link-icon">
-                    <i class="fab fa-whatsapp"></i>
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <i data-lucide="sun" class="dark:hidden"></i>
+            <i data-lucide="moon" class="hidden dark:block"></i>
+        </button>
+
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">Leon Community</h1>
+            <p class="tagline">Connect With Us</p>
+        </header>
+
+        <!-- Links Container -->
+        <main class="links-container">
+            <!-- WhatsApp Group -->
+            <a href="https://chat.whatsapp.com/GMepqMOSEqKA6EDRdVSrNt" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon bg-green-100 dark:bg-green-900/30">
+                    <i data-lucide="users"></i>
                 </div>
                 <div class="link-content">
                     <h3>WhatsApp Group</h3>
                     <p>Join our public community</p>
                 </div>
                 <div class="link-arrow">
-                    <i class="fas fa-chevron-right"></i>
+                    <i data-lucide="chevron-right"></i>
                 </div>
             </a>
-            
-            <!-- Discord Link -->
-            <a href="https://discord.gg/sv5nCUXcDy" class="link-card discord" target="_blank">
-                <div class="link-icon">
-                    <i class="fab fa-discord"></i>
+
+            <!-- Discord -->
+            <a href="https://discord.gg/sv5nCUXcDy" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon bg-indigo-100 dark:bg-indigo-900/30">
+                    <i data-lucide="message-square"></i>
                 </div>
                 <div class="link-content">
                     <h3>Join Our Discord</h3>
                     <p>Chat with our community</p>
                 </div>
                 <div class="link-arrow">
-                    <i class="fas fa-chevron-right"></i>
+                    <i data-lucide="chevron-right"></i>
                 </div>
             </a>
-            
-            <!-- YouTube Link -->
-            <a href="https://youtube.com/@leon3one?si=Mz556iLFel2BcIVe" class="link-card youtube" target="_blank">
-                <div class="link-icon">
-                    <i class="fab fa-youtube"></i>
+
+            <!-- YouTube -->
+            <a href="https://youtube.com/@leon3one" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon bg-red-100 dark:bg-red-900/30">
+                    <i data-lucide="youtube"></i>
                 </div>
                 <div class="link-content">
                     <h3>YouTube Channel</h3>
                     <p>@leon3one</p>
                 </div>
                 <div class="link-arrow">
-                    <i class="fas fa-chevron-right"></i>
+                    <i data-lucide="chevron-right"></i>
                 </div>
             </a>
-            
-            <!-- Instagram Link -->
-            <a href="https://www.instagram.com/gsx_leon33?igsh=MXFtbHhyNzJwMml2Zw==" class="link-card instagram" target="_blank">
-                <div class="link-icon">
-                    <i class="fab fa-instagram"></i>
-                </div>
-                <div class="link-content">
-                    <h3>Follow on Instagram</h3>
-                    <p>@gsx_leon33</p>
-                </div>
-                <div class="link-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-            
-            <!-- WhatsApp Contact Link -->
-            <a href="https://wa.me/6281914609483" class="link-card whatsapp-contact" target="_blank">
-                <div class="link-icon">
-                    <i class="fab fa-whatsapp"></i>
+
+            <!-- WhatsApp Contact -->
+            <a href="https://wa.me/6281914609483" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon bg-green-100 dark:bg-green-900/30">
+                    <i data-lucide="phone"></i>
                 </div>
                 <div class="link-content">
                     <h3>Contact Leon</h3>
                     <p>Direct WhatsApp contact</p>
                 </div>
                 <div class="link-arrow">
-                    <i class="fas fa-chevron-right"></i>
+                    <i data-lucide="chevron-right"></i>
                 </div>
             </a>
-            
-            <!-- Saweria Link -->
-            <a href="http://saweria.co/Agilleon" class="link-card saweria" target="_blank">
-                <div class="link-icon">
-                    <i class="fas fa-hand-holding-heart"></i>
+
+            <!-- Saweria -->
+            <a href="http://saweria.co/Agilleon" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon bg-pink-100 dark:bg-pink-900/30">
+                    <i data-lucide="heart"></i>
                 </div>
                 <div class="link-content">
                     <h3>Support Leon</h3>
                     <p>via Saweria</p>
                 </div>
                 <div class="link-arrow">
-                    <i class="fas fa-chevron-right"></i>
+                    <i data-lucide="chevron-right"></i>
                 </div>
             </a>
-        </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2023 Leon Community. All rights reserved.</p>
+        </footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
