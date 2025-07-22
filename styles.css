@@ -7,6 +7,9 @@
     --instagram-mid: #e6683c;
     --instagram-end: #dc2743;
     --whatsapp: #25D366;
+    --whatsapp-dark: #128C7E;
+    --youtube: #FF0000;
+    --youtube-dark: #CC0000;
     --saweria: #FF7675;
     --text: #2d3436;
     --text-light: #636e72;
@@ -33,6 +36,46 @@ body {
     align-items: center;
 }
 
+/* Page Loader */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
+.loader-content {
+    text-align: center;
+    color: white;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loader-text {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
 /* Particle Canvas */
 #particle-canvas {
     position: fixed;
@@ -52,6 +95,14 @@ body {
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.container.loaded {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Profile Header */
@@ -137,6 +188,11 @@ body {
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transform: translateY(0);
+    opacity: 0;
+}
+
+.link-card.animate__animated {
+    opacity: 1;
 }
 
 .link-card:hover {
@@ -210,20 +266,34 @@ body {
 }
 
 /* Specific Link Colors */
+.whatsapp-group {
+    background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-dark));
+    animation-delay: 0.1s;
+}
+
 .discord {
     background: linear-gradient(135deg, var(--discord), #7289da);
+    animation-delay: 0.2s;
+}
+
+.youtube {
+    background: linear-gradient(135deg, var(--youtube), var(--youtube-dark));
+    animation-delay: 0.3s;
 }
 
 .instagram {
     background: linear-gradient(135deg, var(--instagram), var(--instagram-mid), var(--instagram-end));
+    animation-delay: 0.4s;
 }
 
-.whatsapp {
-    background: linear-gradient(135deg, var(--whatsapp), #128C7E);
+.whatsapp-contact {
+    background: linear-gradient(135deg, #075E54, #128C7E);
+    animation-delay: 0.5s;
 }
 
 .saweria {
     background: linear-gradient(135deg, var(--saweria), #e84393);
+    animation-delay: 0.6s;
 }
 
 /* Floating Social Icons */
@@ -261,22 +331,22 @@ body {
 }
 
 .floating-icons i:nth-child(1) {
-    background: var(--discord);
+    background: var(--whatsapp);
     animation-delay: 0s;
 }
 
 .floating-icons i:nth-child(2) {
-    background: linear-gradient(45deg, var(--instagram), var(--instagram-end));
+    background: var(--discord);
     animation-delay: 1s;
 }
 
 .floating-icons i:nth-child(3) {
-    background: var(--whatsapp);
+    background: var(--youtube);
     animation-delay: 2s;
 }
 
 .floating-icons i:nth-child(4) {
-    background: var(--saweria);
+    background: linear-gradient(45deg, var(--instagram), var(--instagram-end));
     animation-delay: 3s;
 }
 
@@ -313,21 +383,28 @@ body {
     color: rgba(108, 92, 231, 0.1);
 }
 
-/* Animations */
-.animate-delay-1 {
-    animation-delay: 0.1s;
+/* SweetAlert Customization */
+.swal2-popup {
+    border-radius: 15px !important;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
 }
 
-.animate-delay-2 {
-    animation-delay: 0.2s;
+.swal2-title {
+    color: var(--primary) !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
-.animate-delay-3 {
-    animation-delay: 0.3s;
+.swal2-html-container {
+    color: var(--text) !important;
 }
 
-.animate-delay-4 {
-    animation-delay: 0.4s;
+.swal2-confirm {
+    background-color: var(--primary) !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 10px 25px !important;
 }
 
 /* Responsive */
