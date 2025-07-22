@@ -1,24 +1,17 @@
-/* Base Styles - Dark/Gray Theme */
+/* Base Styles */
 :root {
     --primary: #6c5ce7;
     --primary-light: #a29bfe;
     --discord: #5865F2;
     --instagram: #E1306C;
     --whatsapp: #25D366;
-    --whatsapp-dark: #128C7E;
     --youtube: #FF0000;
-    --youtube-dark: #CC0000;
-    --saweria: #FF7675;
     
     --bg-dark: #121212;
-    --bg-darker: #0a0a0a;
-    --card-bg: rgba(30, 30, 30, 0.9);
-    --card-border: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(30, 30, 30, 0.95);
     --text: rgba(255, 255, 255, 0.87);
     --text-light: rgba(255, 255, 255, 0.6);
-    --text-lighter: rgba(255, 255, 255, 0.38);
     
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -32,22 +25,16 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text);
-    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-/* Particle Canvas */
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+body.loaded {
+    opacity: 1;
 }
 
 /* Container Styles */
@@ -56,22 +43,20 @@ body {
     max-width: 500px;
     padding: 20px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
-    opacity: 1;
 }
 
 /* Profile Header */
 .profile-header {
     text-align: center;
     margin-bottom: 30px;
-    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.profile-text {
-    position: relative;
-    display: inline-block;
-    padding: 0 30px;
+.profile-header.loaded {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .logo-text {
@@ -83,8 +68,6 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    position: relative;
-    z-index: 2;
 }
 
 .tagline {
@@ -93,32 +76,6 @@ body {
     font-weight: 300;
     letter-spacing: 2px;
     text-transform: uppercase;
-    position: relative;
-    z-index: 2;
-}
-
-.pulse-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(162, 155, 254, 0.1));
-    z-index: 1;
-    animation: pulse 3s infinite ease-in-out;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.2);
-        opacity: 0.4;
-    }
 }
 
 /* Links Container */
@@ -137,35 +94,25 @@ body {
     text-decoration: none;
     color: white;
     transition: var(--transition);
-    position: relative;
-    overflow: hidden;
     background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+}
+
+.link-card.loaded {
     opacity: 1;
     transform: translateY(0);
 }
 
+.link-card:nth-child(1) { transition-delay: 0.2s; }
+.link-card:nth-child(2) { transition-delay: 0.3s; }
+.link-card:nth-child(3) { transition-delay: 0.4s; }
+.link-card:nth-child(4) { transition-delay: 0.5s; }
+
 .link-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.link-hover-effect {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
-    opacity: 0;
-    transition: var(--transition);
-}
-
-.link-card:hover .link-hover-effect {
-    opacity: 1;
+    background-color: rgba(40, 40, 40, 0.95);
 }
 
 .link-icon {
@@ -219,158 +166,10 @@ body {
 }
 
 /* Specific Link Colors */
-.whatsapp-group {
-    border-left: 4px solid var(--whatsapp);
-}
-
-.discord {
-    border-left: 4px solid var(--discord);
-}
-
-.youtube {
-    border-left: 4px solid var(--youtube);
-}
-
-.instagram {
-    border-left: 4px solid var(--instagram);
-}
-
-.whatsapp-contact {
-    border-left: 4px solid var(--whatsapp-dark);
-}
-
-.saweria {
-    border-left: 4px solid var(--saweria);
-}
-
-/* Floating Social Icons */
-.social-floater {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
-}
-
-.floating-icons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.floating-icons a {
-    text-decoration: none;
-    color: white;
-}
-
-.floating-icons i {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: var(--transition);
-    animation: float 6s infinite ease-in-out;
-}
-
-.floating-icons i:nth-child(1) {
-    background-color: var(--whatsapp);
-    animation-delay: 0s;
-}
-
-.floating-icons i:nth-child(2) {
-    background-color: var(--discord);
-    animation-delay: 1s;
-}
-
-.floating-icons i:nth-child(3) {
-    background-color: var(--youtube);
-    animation-delay: 2s;
-}
-
-.floating-icons i:nth-child(4) {
-    background-color: var(--instagram);
-    animation-delay: 3s;
-}
-
-.floating-icons i:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-/* Footer Wave */
-.footer-wave {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    z-index: -1;
-}
-
-.footer-wave svg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    color: rgba(30, 30, 30, 0.8);
-}
-
-/* SweetAlert Customization */
-.swal2-popup {
-    background: var(--card-bg) !important;
-    border: 1px solid var(--card-border) !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 12px !important;
-    color: var(--text) !important;
-}
-
-.swal2-title {
-    color: var(--text) !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 600 !important;
-}
-
-.swal2-html-container {
-    color: var(--text-light) !important;
-    font-size: 14px !important;
-}
-
-.swal2-confirm {
-    background-color: var(--primary) !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 10px 24px !important;
-    font-weight: 500 !important;
-    transition: var(--transition) !important;
-}
-
-.swal2-confirm:hover {
-    background-color: var(--primary-light) !important;
-}
-
-.swal2-cancel {
-    color: var(--text-light) !important;
-    background: transparent !important;
-    border: 1px solid var(--card-border) !important;
-    border-radius: 8px !important;
-}
+.whatsapp-group .link-icon { color: var(--whatsapp); }
+.discord .link-icon { color: var(--discord); }
+.youtube .link-icon { color: var(--youtube); }
+.instagram .link-icon { color: var(--instagram); }
 
 /* Responsive */
 @media (max-width: 600px) {
@@ -384,17 +183,6 @@ body {
     
     .link-card {
         padding: 14px 16px;
-    }
-    
-    .social-floater {
-        bottom: 15px;
-        right: 15px;
-    }
-    
-    .floating-icons i {
-        width: 42px;
-        height: 42px;
-        font-size: 16px;
     }
 }
 
