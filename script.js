@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Show page loader
-    const pageLoader = document.querySelector('.page-loader');
-    const container = document.querySelector('.container');
-    
     // Initialize Particle Canvas
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
@@ -15,10 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 3 + 1;
+            this.size = Math.random() * 2 + 1;
             this.speedX = Math.random() * 1 - 0.5;
             this.speedY = Math.random() * 1 - 0.5;
-            this.color = `rgba(${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`;
+            this.color = `rgba(255, 255, 255, ${Math.random() * 0.2 + 0.05})`;
+            this.alpha = Math.random() * 0.5 + 0.05;
         }
         
         update() {
@@ -30,15 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         draw() {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
+            ctx.restore();
         }
     }
     
     const particles = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 80; i++) {
         particles.push(new Particle());
     }
     
@@ -53,46 +53,36 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(animateParticles);
     }
     
-    // Simulate loading
-    setTimeout(() => {
-        // Hide loader and show content
-        pageLoader.style.opacity = '0';
-        setTimeout(() => {
-            pageLoader.style.display = 'none';
-            container.classList.add('loaded');
-            
-            // Start animations
-            animateParticles();
-            initAnimations();
-            
-            // Show WhatsApp popup after 1 second
-            setTimeout(showWhatsAppPopup, 1000);
-        }, 500);
-    }, 2000);
+    // Start animations immediately
+    animateParticles();
+    initAnimations();
+    
+    // Show WhatsApp popup after 1 second
+    setTimeout(showWhatsAppPopup, 1000);
     
     function initAnimations() {
         // GSAP Animations
         gsap.from(".profile-text", {
-            duration: 1.5,
-            y: -50,
+            duration: 1,
+            y: -30,
             opacity: 0,
-            ease: "back.out(1.7)"
+            ease: "power2.out"
         });
         
         const linkCards = document.querySelectorAll('.link-card');
         linkCards.forEach((card, index) => {
             gsap.from(card, {
-                duration: 0.8,
-                x: -50,
+                duration: 0.6,
+                x: -30,
                 opacity: 0,
-                delay: index * 0.1 + 0.5,
-                ease: "power3.out"
+                delay: index * 0.1,
+                ease: "power2.out"
             });
             
             // Hover effect
             card.addEventListener('mouseenter', () => {
                 gsap.to(card, {
-                    duration: 0.3,
+                    duration: 0.2,
                     scale: 1.02,
                     ease: "power1.out"
                 });
@@ -100,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             card.addEventListener('mouseleave', () => {
                 gsap.to(card, {
-                    duration: 0.3,
+                    duration: 0.2,
                     scale: 1,
                     ease: "power1.out"
                 });
@@ -111,17 +101,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const floatingIcons = document.querySelectorAll('.floating-icons i');
         floatingIcons.forEach((icon, index) => {
             gsap.from(icon, {
-                duration: 1,
-                y: 50,
+                duration: 0.8,
+                y: 30,
                 opacity: 0,
-                delay: index * 0.2 + 1,
-                ease: "elastic.out(1, 0.5)"
+                delay: index * 0.15 + 0.5,
+                ease: "back.out(1.7)"
             });
         });
         
         // Ripple effect for links
         linkCards.forEach(card => {
             card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetUrl = this.getAttribute('href');
+                
                 const rect = this.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
@@ -135,7 +128,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 setTimeout(() => {
                     ripple.remove();
-                }, 1000);
+                    window.open(targetUrl, '_blank');
+                }, 500);
             });
         });
     }
@@ -146,38 +140,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!popupShown) {
             Swal.fire({
-                title: 'Join Our WhatsApp Group!',
-                html: '<p>Connect with the Leon Community in our public WhatsApp group for chatting, gaming (including CDID Roblox), and more!</p>',
-                icon: 'info',
-                imageUrl: 'https://i.imgur.com/JNvH4Qp.png',
-                imageWidth: 100,
-                imageHeight: 100,
-                imageAlt: 'Leon Community',
+                title: 'Join Our Community!',
+                html: `
+                    <div style="text-align:center;">
+                        <p style="margin-bottom:15px;color:var(--text-light);">Connect with Leon Community members in our WhatsApp group for chatting, gaming (including CDID Roblox), and more!</p>
+                        <div style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);margin:15px 0;">
+                            <i class="fab fa-whatsapp" style="font-size:2rem;color:var(--whatsapp);margin-bottom:10px;"></i>
+                            <p style="font-size:0.9rem;color:var(--text-light);">Click below to join instantly</p>
+                        </div>
+                    </div>
+                `,
                 showConfirmButton: true,
-                confirmButtonText: 'Join Now',
+                confirmButtonText: 'Join WhatsApp Group',
                 showCancelButton: true,
                 cancelButtonText: 'Maybe Later',
-                backdrop: `
-                    rgba(0,0,0,0.4)
-                    url("https://i.pinimg.com/originals/8b/9b/47/8b9b47a0c857c527a8c54f0a46e61f5e.gif")
-                    center top
-                    no-repeat
-                `,
-                background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+                focusConfirm: false,
                 customClass: {
-                    container: 'swal-container',
-                    popup: 'swal-popup',
-                    header: 'swal-header',
-                    title: 'swal-title',
-                    closeButton: 'swal-close',
-                    icon: 'swal-icon',
-                    image: 'swal-image',
-                    content: 'swal-content',
-                    input: 'swal-input',
-                    actions: 'swal-actions',
-                    confirmButton: 'swal-confirm',
-                    cancelButton: 'swal-cancel',
-                    footer: 'swal-footer'
+                    container: 'swal-dark-container',
+                    popup: 'swal-dark-popup',
+                    title: 'swal-dark-title',
+                    htmlContainer: 'swal-dark-html',
+                    confirmButton: 'swal-dark-confirm',
+                    cancelButton: 'swal-dark-cancel'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
