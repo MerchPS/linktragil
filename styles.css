@@ -5,7 +5,9 @@
     --discord: #5865F2;
     --instagram: #E1306C;
     --whatsapp: #25D366;
+    --whatsapp-dark: #075E54;
     --youtube: #FF0000;
+    --saweria: #FF7675;
     
     --bg-dark: #121212;
     --card-bg: rgba(30, 30, 30, 0.95);
@@ -109,6 +111,8 @@ body.loaded {
 .link-card:nth-child(2) { transition-delay: 0.3s; }
 .link-card:nth-child(3) { transition-delay: 0.4s; }
 .link-card:nth-child(4) { transition-delay: 0.5s; }
+.link-card:nth-child(5) { transition-delay: 0.6s; }
+.link-card:nth-child(6) { transition-delay: 0.7s; }
 
 .link-card:hover {
     transform: translateY(-3px);
@@ -170,6 +174,8 @@ body.loaded {
 .discord .link-icon { color: var(--discord); }
 .youtube .link-icon { color: var(--youtube); }
 .instagram .link-icon { color: var(--instagram); }
+.whatsapp-contact .link-icon { color: var(--whatsapp-dark); }
+.saweria .link-icon { color: var(--saweria); }
 
 /* Responsive */
 @media (max-width: 600px) {
