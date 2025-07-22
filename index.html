@@ -109,6 +109,92 @@
             </a>
         </main>
 
+        <!-- Store Section -->
+        <section class="store-section">
+            <h2 class="section-title">Leon Community Store</h2>
+            
+            <!-- Price List Tabs -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="joki">Joki Price List</button>
+                <button class="tab-button" data-tab="gamepass">Gamepass CDID</button>
+            </div>
+            
+            <!-- Joki Products -->
+            <div id="joki" class="tab-content active">
+                <div class="product" data-name="Joki 20M" data-price="60000">
+                    <h3>20M</h3>
+                    <p>Rp 60.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Joki 10M" data-price="40000">
+                    <h3>10M</h3>
+                    <p>Rp 40.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Joki 5M" data-price="30000">
+                    <h3>5M</h3>
+                    <p>Rp 30.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Joki 2M" data-price="15000">
+                    <h3>2M</h3>
+                    <p>Rp 15.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+            </div>
+            
+            <!-- Gamepass Products -->
+            <div id="gamepass" class="tab-content">
+                <div class="product" data-name="Luxury Pass" data-price="30000">
+                    <h3>Luxury Pass</h3>
+                    <p>Rp 30.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Retro Pass" data-price="20000">
+                    <h3>Retro Pass</h3>
+                    <p>Rp 20.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Rare Import Pass" data-price="21000">
+                    <h3>Rare Import Pass</h3>
+                    <p>Rp 21.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Advence Pass" data-price="31000">
+                    <h3>Advence Pass</h3>
+                    <p>Rp 31.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Rumah Mewah" data-price="10000">
+                    <h3>Rumah Mewah</h3>
+                    <p>Rp 10.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="Kendaraan Darurat" data-price="16000">
+                    <h3>Kendaraan Darurat</h3>
+                    <p>Rp 16.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+                <div class="product" data-name="2x Penambahan Mobil" data-price="31000">
+                    <h3>2x Penambahan Mobil</h3>
+                    <p>Rp 31.000</p>
+                    <button class="add-to-cart">+ Keranjang</button>
+                </div>
+            </div>
+            
+            <!-- Shopping Cart -->
+            <div class="cart-container">
+                <h3>Keranjang Belanja</h3>
+                <div id="cart-items" class="cart-items">
+                    <!-- Items will appear here -->
+                </div>
+                <div class="cart-total">
+                    <p>Total: Rp <span id="total-price">0</span></p>
+                    <button id="checkout" class="checkout-btn">Checkout via WhatsApp</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="footer">
             <p>© 2025 Leon Community. All rights reserved.</p>
